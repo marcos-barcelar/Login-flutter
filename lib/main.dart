@@ -1,8 +1,8 @@
-import 'package:atividade_rotas/dashboard_screen.dart';
-import 'package:atividade_rotas/register_screen.dart';
+import 'package:atividade_rotas/screen/dashboard_screen.dart';
+import 'package:atividade_rotas/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'login_screen.dart';
+import 'screen/login_screen.dart';
 
 void main() {
   runApp(const MyApp());

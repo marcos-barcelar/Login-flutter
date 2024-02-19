@@ -1,4 +1,4 @@
-import 'package:atividade_rotas/dashboard_screen.dart';
+import 'package:atividade_rotas/screen/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {

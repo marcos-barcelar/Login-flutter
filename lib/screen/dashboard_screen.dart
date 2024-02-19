@@ -1,4 +1,4 @@
-import 'package:atividade_rotas/login_screen.dart';
+import 'package:atividade_rotas/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
