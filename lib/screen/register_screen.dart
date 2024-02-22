@@ -1,8 +1,21 @@
 import 'package:atividade_rotas/screen/dashboard_screen.dart';
+import 'package:atividade_rotas/data/task_dao.dart';
+import 'package:atividade_rotas/components/tasks.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key, required this.taskContext}) : super(key: key);
+
+  final BuildContext taskContext;
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +45,19 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+
               ElevatedButton(
                 onPressed: () {
-                  onButtonCadastrarClicked(context) {
+                  if (_formKey.currentState!.validate()) {
+                    TaskDao().save(Task(
+                      nameController.text,
+                    ));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Criando uma nova Tarefa!'),
+                      ),
+                    );
+                    Navigator.pop(context);
                   }
                 },
                 child: Text('Cadastrar'),

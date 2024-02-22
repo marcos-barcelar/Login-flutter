@@ -53,7 +53,7 @@ class DashboardScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushReplacementNamed("/register");
+          Navigator.of(context).pushReplacementNamed("/register"); 
         },
         child: const Icon(Icons.add),
       ),
