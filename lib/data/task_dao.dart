@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:atividade_rotas/components/tasks.dart';
 import 'package:atividade_rotas/data/database.dart';
+import 'package:atividade_rotas/data/task_inherited.dart';
 
 class TaskDao {
   static const String _tableName = 'taskTable';
@@ -36,7 +37,6 @@ class TaskDao {
   Map<String, dynamic> toMap(Task tarefa) {
     print('Convertendo tarefa em Map: ');
     final Map<String, dynamic> mapaDeTarefas = Map();
-    mapaDeTarefas[_id] = tarefa.id;
     mapaDeTarefas[_name] = tarefa.name;
     print('Mapa de Tarefas: $mapaDeTarefas');
     return mapaDeTarefas;

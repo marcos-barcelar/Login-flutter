@@ -1,55 +1,49 @@
-import 'package:atividade_rotas/screen/dashboard_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:atividade_rotas/data/task_dao.dart';
 import 'package:atividade_rotas/components/tasks.dart';
-import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key, required this.taskContext}) : super(key: key);
-
-  final BuildContext taskContext;
-
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController nameController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: 300,
-          padding: EdgeInsets.symmetric(vertical: 84.0),
+      appBar: AppBar(
+        title: Text('Registrar Tarefa'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
           child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacementNamed("dashboard");
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Nome da Tarefa',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o nome da tarefa';
+                  }
+                  return null;
                 },
-                child: Icon(Icons.arrow_back),
+                controller: nameController,
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Cadastrar Tarefa',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: "Nome da tarefa"),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 16.0),
+              SizedBox(height: 16.0),
 
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    TaskDao().save(Task(
+                    await TaskDao().save(Task(
+                      0,
                       nameController.text,
                     ));
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -57,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         content: Text('Criando uma nova Tarefa!'),
                       ),
                     );
-                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, "/dashboard");
                   }
                 },
                 child: Text('Cadastrar'),
